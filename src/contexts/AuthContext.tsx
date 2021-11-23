@@ -10,17 +10,18 @@ type User = {
     user: User | undefined;
     signInWithGoogle: () => Promise<void>;
   }
-
   type AuthContextProviderProps = {
     children: ReactNode; 
   }
+
 export const AuthContext = createContext({} as AuthContextType);
 
 
 export function AuthContextProvider(props:AuthContextProviderProps){
   const [user, setUser] = useState<User>();
   
-  useEffect(() => {
+  useEffect(() => {//hook do react, todo hook comeca com hook, esse hook fica observando se houve alteracao no estado de autenticacao, para casos de atualizacao de tela
+
     const unsubscribe = auth.onAuthStateChanged(user => {//verifica se existia um login pre feito pelo usuario
       if(user){
         const {displayName, photoURL, uid} = user//pega informacoes do user

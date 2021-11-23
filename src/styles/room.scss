@@ -13,6 +13,15 @@
             >img{
                 max-height: 45px;
             }
+
+            >div{
+                display: flex;
+                gap: 16px;//adiciona espaçamento entre os componentes do display flex
+
+                button{
+                    height: 40px;
+                }
+            }
         }
     }
     main{
@@ -60,7 +69,24 @@
             align-items: center;
             margin-top: 16px;
 
-            span{
+            .user-info{
+                display: flex;
+                align-items: center;
+                
+                img{
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                }
+                span{
+                    font-size: 14px;
+                    color: #29292e;
+                    font-weight: 500;
+                    font-size: 14px;
+                }
+
+            }
+            > span{
                 font-size: 14px;
                 color: #737380;
                 font-weight: 500;
@@ -76,6 +102,9 @@
                 }
             }
         }
-    }    
+    } 
+    .question-list {
+        margin-top: 32px;
+    }  
     }
 }

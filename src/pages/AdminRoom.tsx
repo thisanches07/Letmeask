@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useParams,useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
 import logoImg from '../assets/images/logo.svg'
@@ -15,11 +15,19 @@ import { database } from '../services/firebase'
 
 export function AdminRoom() {
     // const { user } = useAuth();
+    const navigate = useNavigate()
     const params = useParams();
     const [newQuestion, setNewQuestion] = useState('');
     const roomId = params.id
 
     const {title,questions} = useRoom(roomId);
+
+    async function handleEndRoom(){
+        await database.ref(`rooms/${roomId}`).update({
+             endedAt: new Date(),
+            })
+            navigate('/')
+    }
 
     async function handleDeleteQuestion(questionId:string){
         if (window.confirm('Tem certeza que deseja excluir essa pergunta?')){
@@ -33,7 +41,7 @@ export function AdminRoom() {
                     <img src={logoImg} alt="" />
                     <div>
                     <RoomCode code={roomId!} />
-                    <Button isOutlined>Encerrar sala</Button>
+                    <Button isOutlined onClick={handleEndRoom}>Encerrar sala</Button>
                     </div>
                 </div>
             </header>
